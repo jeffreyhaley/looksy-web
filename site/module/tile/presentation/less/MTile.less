@@ -1,0 +1,268 @@
+@import "MCoreColor.less";
+
+.MTile
+{
+
+	#wrapper {
+		width: 100%;
+  		text-align: center;
+    }
+    
+    #columns {
+	  	margin: auto;	    
+	   	-webkit-column-count: 5;
+		-webkit-column-gap: 2px;
+		-webkit-column-fill: 5px;
+		-moz-column-count: 5;
+		-moz-column-gap: 2px;
+		-moz-column-fill: 5px;
+		column-count: 5;
+		column-gap: 2px;
+		column-fill: auto;
+
+	}
+
+	@media (min-width: 0px) {
+		#columns {
+			width: 310px;
+			columns:300px 1;
+			-webkit-columns:300px 1; 
+			-moz-columns:300px 1 
+			
+		}
+	}
+	
+	@media (min-width: 650px) {
+		#columns {
+			width: 620px;
+			columns:300px 2;
+			-webkit-columns:300px 2; 
+			-moz-columns:300px 2; 
+			
+			
+		}
+	}
+		
+	@media (min-width: 975px) {
+	
+		#columns {
+			width: 930px;
+			columns:300px 3;
+			-webkit-columns:300px 3; 
+			-moz-columns:300px 3;
+		}
+	}
+	
+	@media (min-width: 1300px) {
+		#columns {
+			width: 1240px;
+			columns:300px 4;
+	  		-webkit-columns:300px 4; 
+	  		-moz-columns:300px 4; 
+		}
+	}
+	
+	#btnRotate {
+		padding: 7px;
+	}
+
+	
+	.pin{		
+	  	-webkit-column-break-inside: avoid;
+		-moz-column-break-inside: avoid;
+		column-break-inside: avoid;
+		break-inside: avoid-column;
+		page-break-inside: avoid;
+	  
+	  	width: 300px;
+	    display: inline-block;
+	    margin-bottom: 10px;
+	    text-align: left;  	    
+	    
+	    height: auto !important;
+		overflow: visible !important;		
+		position: relative;
+	}
+	
+	.pin:hover .action-menu {
+		visibility: visible;
+	}
+	
+	.action-menu > ul li
+	{		
+		list-style: none;
+		text-align: -webkit-match-parent;
+		overflow: hidden;		
+	}
+	.action-menu
+	{
+	
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		visibility: hidden;
+	}
+	
+	.header-module-container
+	{
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		-ms-border-radius: 3px;
+		-o-border-radius: 3px;
+		border-radius: 3px;
+		-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		-moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		background: @color-white;
+		
+	}
+	
+	.instruction-container	
+	{
+		padding: 10px;
+	}
+	
+	.instruction-module-container	
+	{
+				padding-left: 2px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		-ms-border-radius: 3px;
+		-o-border-radius: 3px;
+		border-radius: 3px;
+		-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		-moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		background: @color-white;
+		
+		min-width: 307px;
+		max-width: 600px;
+		margin-bottom: 10px;
+		padding: 0px;
+		display: flex;
+		
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.tile-container
+	{	
+		.dropdown
+		{
+			left: 270px;
+			bottom: 35px;
+		}
+		.tile-image {
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			-ms-border-radius: 3px;
+			-o-border-radius: 3px;
+			border-radius: 3px;
+			height: 100%;	
+			cursor: -webkit-zoom-in;
+			cursor: zoom-in;	
+			
+			img
+			{
+				border-top-left-radius: 3px;
+				border-top-right-radius: 3px;
+				width: 100%;
+			} 
+		}
+	
+		.tile-footer-info
+		{
+			border-top: 1px solid @color-lightmedium-gray;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background-color: @color-light-gray;
+		}
+		
+		
+		.tile-info
+		{
+			font-size: 13px;
+			color: #7d7d80;			
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 5px;
+			padding-bottom: 10px;	
+		}
+		
+		.tile-form
+		{
+			clear: both;
+		}
+		
+		.tile-time
+		{
+			font-size: 11px;
+			color: @color-gray;
+		}
+		
+		.tile-stats-favorite
+		{
+			padding-left: 2px;
+			padding-right: 2px;
+			font-size: 13px;
+			color: @color-red;
+			opacity: 0.8;
+		}
+		
+		.tile-stats
+		{
+			padding-left: 2px;
+			padding-right: 2px;
+			font-size: 13px;
+			color: @color-red;
+			opacity: 0.8;
+		}
+	}
+	
+	.module-container
+	{
+		padding: 0px;
+	}
+	
+
+	
+	// --------------------------------------------------------------
+	// Bootsrap Overrides
+	// --------------------------------------------------------------
+	.form-group
+	{
+		padding-bottom: 5px;
+		padding-top: 5px;
+		margin-bottom: 0px;
+	}
+	
+	.modal-dialog
+	{
+		ul li {
+		list-style: none;
+		text-align: -webkit-match-parent;
+		overflow: hidden;
+		border-top: 1px solid #dfdfdf;
+	}
+	
+		width: 500px;
+		
+		.modal-footer
+		{			
+			padding: 15px 5px 7px 5px;
+			text-align: right;			
+			margin: 0px 0px 3px 0px;			
+		}
+	
+		.modal-body, .row, .control-group
+		{
+			margin: 0px;
+			padding: 0px;
+		}	
+
+	}
+	
+
+}

@@ -1,0 +1,1216 @@
+
+/**
+ * VARIABLES  ----------------------------------------------------*/
+/**
+ * CSS ANIMATIONS  -----------------------------------------------*/
+@-webkit-keyframes pulsateSmall {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(1.5, 1.5);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes pulsateLarge {
+  0% {
+    -webkit-transform: scale(0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-transform: scale(0.3, 0.3);
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+/**
+ * COMMON  ------------------------------------------------------*/
+::selection {
+  background: #f1f7f8;
+}
+::-moz-selection {
+  background: #f1f7f8;
+}
+a {
+  color: #d2322d;
+  text-decoration: none;
+  outline: 0;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  outline: 0;
+}
+a.button,
+input.button {
+  float: left;
+  line-height: 40px;
+  background: #d2322d;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-family: 'DINWebBold', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0 30px;
+  padding-top: 3px;
+  transition: background 0.2s;
+  -webkit-font-smoothing: antialiased;
+}
+a.button:hover,
+input.button:hover {
+  text-decoration: none;
+  background: #0f8bbe;
+}
+@media (max-width: 767px) {
+  a.button,
+  input.button {
+    width: 100%;
+    text-align: center;
+  }
+}
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 300;
+}
+h1.blue,
+h2.blue,
+h3.blue,
+h4.blue {
+  color: #d2322d;
+}
+h1 {
+  font-size: 40px;
+  line-height: 50px;
+}
+@media (max-width: 767px) {
+  h1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+h2 {
+  font-size: 40px;
+  line-height: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  h2 {
+    font-size: 36px;
+  }
+}
+@media (max-width: 767px) {
+  h2 {
+    font-size: 30px;
+  }
+}
+h3 {
+  font-size: 26px;
+  line-height: 32px;
+  color: #333;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  h3 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 767px) {
+  h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+h4 {
+  font-size: 22px;
+  line-height: 28px;
+  color: #666;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  h4 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+@media (max-width: 767px) {
+  h4 {
+    font-size: 16px;
+  }
+}
+p {
+  font-size: 18px;
+  line-height: 26px;
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 24px;
+}
+@media (max-width: 767px) {
+  p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+.text-center {
+  text-align: center;
+}
+.line {
+  position: absolute;
+  width: 1px;
+  height: 0;
+  background: #d2322d;
+  left: 50%;
+  transition: height 1s;
+}
+.beacon {
+  position: absolute;
+  height: 150px;
+  left: 50%;
+}
+.beacon .circle1,
+.beacon .circle2,
+.beacon .circle3 {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border: 2px solid #d2322d;
+  transition-timing-function: ease-out;
+  -webkit-transition-timing-function: ease-out;
+  transition: 0.6s;
+}
+.beacon .circle1 {
+  background: #d2322d;
+  border-radius: 5px;
+}
+.beacon .circle2 {
+  border-radius: 36px;
+}
+.beacon .circle3 {
+  border-radius: 72px;
+}
+.beacon.active .circle1,
+.beacon.active .circle2,
+.beacon.active .circle3 {
+  opacity: 1;
+}
+.beacon.active .circle1 {
+  width: 11px;
+  height: 11px;
+  margin-left: -5px;
+  margin-top: -5px;
+}
+.beacon.active .circle2 {
+  width: 73px;
+  height: 73px;
+  margin-left: -36px;
+  margin-top: -36px;
+}
+.beacon.active .circle3 {
+  width: 145px;
+  height: 145px;
+  margin-left: -72px;
+  margin-top: -72px;
+}
+/**
+ * HERO  --------------------------------------------------------*/
+#hero {
+	z-index: -10;
+top: 0;
+position: absolute;
+  
+  width: 100%;
+  height: 55%;
+  min-height: 460px;
+  max-height: 570px;
+  background: #222 url("http://lighthousebeacon.com.au/img/bg-hero.jpg") bottom center no-repeat;
+  overflow: hidden;
+}
+#hero .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("http://lighthousebeacon.com.au/img/bg-darken.png") repeat;
+  opacity: 0;
+}
+#hero .background.active {
+  opacity: 1;
+}
+#hero .hero-beacon {
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  margin-left: -302px;
+}
+#hero .hero-beacon .circle1,
+#hero .hero-beacon .circle2 {
+  position: absolute;
+  border: 2px solid #d2322d;
+  opacity: 0;
+  -webkit-animation: pulsateLarge 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+#hero .hero-beacon .circle1 {
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
+  border-radius: 25px;
+}
+#hero .hero-beacon .circle2 {
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  border-radius: 50px;
+}
+#hero .phone {
+  margin-left: 60%;
+  width: 480px;
+  height: 500px;
+}
+#hero .phone #hero-phone {
+  width: 480px;
+  height: 500px;
+  margin-top: 600px;
+  background: url("http://lighthousebeacon.com.au/img/bg-phone.png") 0 0;
+}
+#hero .phone #hero-phone .carousel-inner {
+  position: absolute;
+  top: 80px;
+  left: 62px;
+  width: 181px;
+  height: 306px;
+}
+#hero .phone #hero-phone .carousel-indicators {
+  position: absolute;
+  bottom: 110px;
+  left: 133px;
+  margin-left: 0;
+}
+#hero .phone #hero-phone .carousel-indicators li {
+  float: left;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: #e6e6e6;
+  margin: 0 5px 0 0;
+  border: 0 none;
+}
+#hero .phone #hero-phone .carousel-indicators li.active {
+  background: #555;
+  border: 0 none;
+}
+@media (max-width: 767px) {
+  #hero {
+    display: none;
+  }
+}
+/**
+ * MENU  --------------------------------------------------------*/
+#menu {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  background: #111;
+  z-index: 1000;
+}
+#menu.affix {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  margin-top: 0;
+}
+#menu .logo {
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  margin-left: -100px;
+}
+#menu p {
+  float: left;
+  color: #c0bbb8;
+  font-size: 20px;
+  line-height: 70px;
+  margin: 0;
+  font-weight: normal;
+}
+#menu ul.nav {
+  float: right;
+  height: 70px;
+  list-style: none;
+  margin: 0;
+}
+#menu ul.nav li {
+  float: left;
+  height: 70px;
+}
+#menu ul.nav li a {
+  float: left;
+  height: 70px;
+  line-height: 72px;
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  color: #c0bbb8;
+  padding: 0 8px;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  background: none;
+}
+#menu ul.nav li:hover a,
+#menu ul.nav li.active a {
+  color: #fff;
+}
+#menu ul.nav li.register a {
+  color: #00c0ff;
+}
+#menu ul.nav li.register:hover a,
+#menu ul.nav li.register.active a {
+  color: #00deff;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #menu .logo {
+    position: static;
+    float: left;
+    margin-left: 0;
+    margin-top: 15px;
+  }
+  #menu .logo img {
+    width: 200px;
+  }
+  #menu p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 767px) {
+  #menu {
+    position: fixed;
+    top: 0;
+  }
+  #menu .logo {
+    position: absolute;
+    margin-left: -100px;
+  }
+  #menu ul {
+    display: none;
+  }
+}
+#intro {
+  position: relative;
+  margin-top: 70px;
+  width: 100%;
+  height: 55%;
+}
+#intro h1 {
+  margin-top: 50px;
+}
+#intro .down-arrow {
+  position: absolute;
+  left: 50%;
+  margin-top: 40px;
+  width: 30px;
+  margin-left: -15px;
+}
+#intro .down-arrow .arrow1,
+#intro .down-arrow .arrow2 {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 17px;
+  background: url("http://lighthousebeacon.com.au/img/arrow-down.png") 0 0 no-repeat;
+}
+#intro .down-arrow .arrow2 {
+  top: 13px;
+}
+@media (max-width: 767px) {
+  #intro {
+    height: 100%;
+  }
+  #intro h1 {
+    margin-top: 20px;
+  }
+}
+#about {
+  position: relative;
+  overflow: hidden;
+}
+#about .start {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  margin-left: -6px;
+  width: 13px;
+  height: 13px;
+  border-radius: 7px;
+  background: #d2322d;
+}
+#about .line1 {
+  position: absolute;
+  top: 23px;
+  height: 0;
+}
+#about .line1.active {
+  height: 360px;
+}
+@media (max-width: 767px) {
+  #about .line1.active {
+    height: 150px;
+  }
+}
+#about .beacon1 {
+  top: 383px;
+}
+@media (max-width: 767px) {
+  #about .beacon1 {
+    top: 170px;
+  }
+}
+#about #about-beacons {
+  position: relative;
+  height: 681px;
+  opacity: 0;
+  overflow: hidden;
+}
+#about #about-beacons .hand {
+  position: absolute;
+  width: 50%;
+  min-width: 820px;
+  right: 100%;
+  top: 270px;
+  height: 411px;
+  background: url("http://lighthousebeacon.com.au/img/hand-beacons.jpg") left top no-repeat;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  z-index: -1;
+}
+@media (max-width: 767px) {
+  #about #about-beacons .hand {
+    height: 200px;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+    transition: 1s;
+  }
+}
+#about #about-beacons .content {
+  position: absolute;
+  left: 100%;
+  top: 270px;
+  width: 360px;
+  margin-left: 130px;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+}
+#about #about-beacons .content h2 {
+  margin-bottom: 10px;
+}
+#about #about-beacons .content h3 {
+  margin-top: 10px;
+}
+@media (max-width: 767px) {
+  #about #about-beacons .content {
+    top: 430px;
+    margin-left: 0;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+  }
+}
+#about #about-beacons.active {
+  opacity: 1;
+}
+#about #about-beacons.active .hand {
+  right: 50%;
+}
+@media (max-width: 767px) {
+  #about #about-beacons.active .hand {
+    right: -110%;
+    background-size: 50%;
+  }
+}
+#about #about-beacons.active .content {
+  left: 50%;
+}
+@media (max-width: 767px) {
+  #about #about-beacons.active .content {
+    left: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #about #about-beacons .content {
+    width: 300px;
+  }
+}
+#about .line2 {
+  top: 455px;
+  height: 0;
+}
+#about .line2.active {
+  height: 550px;
+}
+@media (max-width: 767px) {
+  #about .line2 {
+    top: 625px;
+  }
+  #about .line2.active {
+    height: 200px;
+  }
+}
+#about .beacon2 {
+  top: 1005px;
+}
+@media (max-width: 767px) {
+  #about .beacon2 {
+    top: 830px;
+  }
+}
+#about #retail {
+  position: relative;
+  height: 740px;
+  transition: 1s;
+  overflow: hidden;
+}
+#about #retail .background {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 470px;
+  background: url("http://lighthousebeacon.com.au/img/bg-retail.jpg") center top no-repeat;
+  transition: 1s;
+}
+#about #retail.active .background {
+  opacity: 1;
+}
+#about #retail .content {
+  position: absolute;
+  padding-top: 40px;
+  width: 460px;
+  right: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: rgba(255,255,255,0.8);
+  padding-right: 130px;
+}
+#about #retail .content ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+#about #retail .content ul li {
+  font-size: 16px;
+  line-height: 24px;
+  color: #d2322d;
+  margin-bottom: 1em;
+  padding-left: 10px;
+}
+#about #retail .content ul li span {
+  color: #333;
+  font-size: 20px;
+}
+#about #retail .content .button {
+  margin-left: 30px;
+}
+#about #retail .arm-phone {
+  position: absolute;
+  width: 50%;
+  min-width: 820px;
+  height: 740px;
+  left: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: url("http://lighthousebeacon.com.au/img/arm-phone.png") right top no-repeat;
+  z-index: 100;
+}
+#about #retail.active .arm-phone {
+  left: 50%;
+}
+#about #retail.active .content {
+  right: 50%;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #about #retail .content {
+    width: 420px;
+  }
+  #about #retail .content ul li span {
+    font-size: 18px;
+  }
+}
+@media (max-width: 767px) {
+  #about #retail {
+    height: 970px;
+  }
+  #about #retail .background {
+    top: -90px;
+  }
+  #about #retail .arm-phone {
+    background-size: 50%;
+    background-position: left top;
+    top: 170px;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+  }
+  #about #retail .content {
+    top: 460px;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255,255,255,0.6);
+    z-index: 500;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+  }
+  #about #retail .content .button {
+    margin-left: 0;
+  }
+  #about #retail.active .content {
+    right: 0;
+  }
+}
+#about .line3 {
+  top: 1078px;
+  height: 0;
+}
+#about .line3.active {
+  height: 550px;
+}
+@media (max-width: 767px) {
+  #about .line3 {
+    top: 1655px;
+  }
+  #about .line3.active {
+    height: 200px;
+  }
+}
+#about .beacon3 {
+  top: 1628px;
+}
+@media (max-width: 767px) {
+  #about .beacon3 {
+    top: 1858px;
+  }
+}
+#about #gallery {
+  position: relative;
+  height: 740px;
+  opacity: 0;
+  transition: 1s;
+  overflow: hidden;
+}
+#about #gallery .background {
+  position: absolute;
+  top: 27px;
+  left: 0;
+  width: 100%;
+  height: 380px;
+  background: url("http://lighthousebeacon.com.au/img/wall.jpg") center top repeat-x;
+  transition: 1s;
+}
+#about #gallery.active .background {
+  opacity: 1;
+}
+#about #gallery .content {
+  position: absolute;
+  top: 75px;
+  width: 50%;
+  height: 100%;
+  left: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: rgba(255,255,255,0.6);
+}
+#about #gallery .content .wrapper {
+  width: 460px;
+  padding-left: 120px;
+}
+#about #gallery .content h3 {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 24px;
+}
+#about #gallery .content ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+#about #gallery .content ul li {
+  font-size: 16px;
+  line-height: 24px;
+  color: #d2322d;
+  margin-bottom: 1em;
+  padding-left: 10px;
+}
+#about #gallery .content ul li span {
+  color: #333;
+  font-size: 20px;
+}
+#about #gallery .arm-phone {
+  position: absolute;
+  width: 50%;
+  min-width: 820px;
+  height: 740px;
+  right: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: url("http://lighthousebeacon.com.au/img/arm-phone2.png") left top no-repeat;
+}
+#about #gallery.active {
+  opacity: 1;
+}
+#about #gallery.active .arm-phone {
+  right: 50%;
+}
+#about #gallery.active .content {
+  left: 50%;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #about #gallery .content .wrapper {
+    width: 420px;
+  }
+}
+@media (max-width: 767px) {
+  #about #gallery {
+    height: 950px;
+  }
+  #about #gallery .arm-phone {
+    background-size: 50%;
+    background-position: left top;
+    top: 220px;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+  }
+  #about #gallery.active .arm-phone {
+    left: -150px;
+    z-index: 500;
+  }
+  #about #gallery .content {
+    top: 460px;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255,255,255,0.6);
+    z-index: 500;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+  }
+  #about #gallery .content .wrapper {
+    width: 100%;
+    padding-left: 0;
+  }
+  #about #gallery .content h3 {
+    font-size: 20px;
+  }
+  #about #gallery.active .content {
+    left: 0;
+  }
+}
+#about #event {
+  position: relative;
+  height: 740px;
+  opacity: 0;
+  transition: 1s;
+  overflow: hidden;
+}
+#about #event .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 470px;
+  background: url("http://lighthousebeacon.com.au/img/bg-events.jpg") center repeat-x;
+  transition: 1s;
+}
+#about #event.active .background {
+  opacity: 1;
+}
+#about #event.affix .background {
+  opacity: 1;
+}
+#about #event .content {
+  position: absolute;
+  width: 50%;
+  height: 470px;
+  padding-top: 40px;
+  right: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: rgba(255,255,255,0.8);
+  padding-right: 130px;
+}
+#about #event .content .wrap {
+  float: right;
+  width: 340px;
+}
+#about #event .content ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+#about #event .content ul li {
+  font-size: 16px;
+  line-height: 24px;
+  color: #d2322d;
+  margin-bottom: 1em;
+  padding-left: 10px;
+}
+#about #event .content ul li span {
+  color: #333;
+  font-size: 20px;
+}
+#about #event .content .button {
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+#about #event .arm-phone {
+  position: absolute;
+  width: 50%;
+  min-width: 820px;
+  height: 740px;
+  left: 100%;
+  transition: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  background: url("http://lighthousebeacon.com.au/img/arm-phone3.png") right top no-repeat;
+}
+#about #event.active {
+  opacity: 1;
+}
+#about #event.active .arm-phone {
+  left: 50%;
+}
+#about #event.active .content {
+  right: 50%;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  #about #event .content .wrap {
+    width: 300px;
+  }
+}
+@media (max-width: 767px) {
+  #about #event {
+    height: 810px;
+  }
+  #about #event .arm-phone {
+    background-size: 50%;
+    background-position: left top;
+    top: 210px;
+    z-index: 500;
+  }
+  #about #event .content {
+    top: 460px;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255,255,255,0.6);
+    z-index: 500;
+    transition-delay: 1s;
+    -webkit-transition-delay: 1s;
+    z-index: 600;
+  }
+  #about #event .content .wrap {
+    width: 100%;
+  }
+  #about #event .content .button {
+    margin-left: 0;
+  }
+  #about #event.active .content {
+    right: 0;
+  }
+}
+#about .line4 {
+  top: 1700px;
+  height: 0;
+}
+#about .line4.active {
+  height: 550px;
+}
+@media (max-width: 767px) {
+  #about .line4 {
+    top: 2600px;
+  }
+  #about .line4.active {
+    height: 200px;
+  }
+}
+#about .beacon4 {
+  top: 2250px;
+}
+@media (max-width: 767px) {
+  #about .beacon4 {
+    top: 2800px;
+  }
+}
+#about .line5 {
+  top: 2322px;
+  height: 0;
+}
+#about .line5.active {
+  height: 500px;
+}
+@media (max-width: 767px) {
+  #about .line5 {
+    display: none;
+  }
+}
+#about .beacon5 {
+  top: 2820px;
+}
+@media (max-width: 767px) {
+  #about .beacon5 {
+    display: none;
+  }
+}
+#about #opportunity {
+  text-align: center;
+  margin-bottom: 100px;
+  opacity: 0;
+  transition: 1s;
+}
+#about #opportunity h2 {
+  margin-top: -40px;
+  padding-bottom: 50px;
+}
+#about #opportunity.active {
+  opacity: 1;
+}
+@media (max-width: 767px) {
+  #about #opportunity {
+    transition-delay: 0;
+    -webkit-transition-delay: 0;
+    margin-bottom: 20px;
+  }
+  #about #opportunity h2 {
+    margin-top: 50px;
+  }
+}
+/* FEATURES
+---------------------------------------------------------- */
+#features {
+  background-color: #f1f7f8;
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+#features .feature {
+  margin-top: 80px;
+}
+#features .feature h3 {
+  color: #d2322d;
+  padding: 14px 0 16px 75px;
+  background-repeat: no-repeat;
+}
+#features .feature h3.campaign-centre {
+  background-image: url("http://lighthousebeacon.com.au/img/feature-campaign-center.png");
+}
+#features .feature h3.real-world-analytics {
+  background-image: url("http://lighthousebeacon.com.au/img/feature-real-world-analytics.png");
+}
+#features .feature h3.app-integration {
+  background-image: url("http://lighthousebeacon.com.au/img/feature-app-integration.png");
+}
+#features .feature h3.custom-solutions {
+  background-image: url("http://lighthousebeacon.com.au/img/feature-custom-solutions.png");
+}
+#features .feature img {
+  border: 2px solid #dae7eb;
+}
+#features .spacer {
+  display: inline-block;
+  width: 1px;
+  height: 15px;
+  line-height: 30px;
+  background: #ccc;
+  margin: 0 20px;
+}
+#features h4.inlight {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+@media (max-width: 767px) {
+  #features {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  #features .feature {
+    margin-top: 20px;
+    text-align: center;
+  }
+  #features .feature h3 {
+    line-height: 32px;
+    padding-left: 0;
+  }
+  #features .feature img {
+    margin: 0 auto;
+  }
+}
+/* CONTACT
+---------------------------------------------------------- */
+#contact {
+  background-color: #16181a;
+  padding-top: 130px;
+  padding-bottom: 100px;
+}
+#contact h2 {
+  color: #fff;
+  font-size: 32px;
+}
+#contact h3 {
+  color: #d2322d;
+  font-weight: 300;
+  font-size: 32px;
+  margin-top: 50px;
+  padding: 24px 0 26px 100px;
+  background-repeat: no-repeat;
+  background-image: url("http://lighthousebeacon.com.au/img/phone.png");
+}
+#contact input[type="text"],
+#contact textarea {
+  width: 100%;
+  background-color: transparent;
+  color: #d2322d;
+  font-weight: 300;
+  border: 1px solid #d2322d;
+  font-size: 24px;
+  padding: 10px;
+  margin-bottom: 20px;
+  transition: border 0.3s, color 0.3s;
+}
+#contact input[type="text"]:focus,
+#contact textarea:focus {
+  border: 1px solid #fff;
+  color: #fff;
+  outline: none;
+}
+#contact textarea {
+  height: 180px;
+}
+#contact input[type="submit"] {
+  background-color: #d2322d;
+  color: #000 !important;
+  border: 0 none;
+  text-shadow: none;
+  height: 40px;
+}
+#contact input[type="submit"]:hover {
+  text-decoration: none;
+  background: #0f8bbe;
+}
+#contact input[type="submit"]:focus {
+  outline: none;
+  text-shadow: none;
+}
+#contact .message {
+  float: left;
+  padding-left: 10px;
+}
+#contact .message p {
+  padding-left: 10px;
+  margin: 0;
+  line-height: 43px;
+}
+#contact .message p.sending {
+  color: #0f8bbe;
+}
+#contact .message p.success {
+  color: #d2322d;
+}
+#contact .message p.error {
+  color: #db0034;
+}
+#contact ::-webkit-input-placeholder {
+  color: #d2322d;
+}
+#contact :focus::-webkit-input-placeholder {
+  color: #fff;
+}
+#contact :-moz-placeholder {
+  color: #d2322d;
+}
+#contact :focus:-moz-placeholder {
+  color: #fff;
+}
+#contact ::-moz-placeholder {
+  color: #d2322d;
+}
+#contact :focus::-moz-placeholder {
+  color: #fff;
+}
+#contact :-ms-input-placeholder {
+  color: #d2322d;
+}
+#contact :focus:-ms-input-placeholder {
+  color: #fff;
+}
+@media (max-width: 767px) {
+  #contact {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  #contact input[type="text"],
+  #contact textarea {
+    font-size: 16px;
+  }
+  #contact h2 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  #contact h3 {
+    font-size: 24px;
+    background-size: 60px 60px;
+    padding: 0 0 20px 80px;
+    line-height: 60px;
+    margin-top: 20px;
+  }
+}
+/* FOOTER
+---------------------------------------------------------- */
+#footer {
+  background-color: #111;
+  padding: 60px;
+}
+#footer p {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+#footer a {
+  color: #d7d7d7;
+}
+#footer a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 767px) {
+  #footer {
+    padding: 20px;
+  }
+}
+/* FAQ
+---------------------------------------------------------- */
+#faq {
+  padding: 100px 0 150px;
+}
+#faq h3 {
+  color: #d2322d;
+  margin-bottom: 5px;
+}
+#faq p {
+  margin-top: 0;
+}

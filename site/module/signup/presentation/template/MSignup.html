@@ -1,0 +1,40 @@
+<div class="MSignup ng-cloak">
+	<div class="container">		
+					
+		<img class="" src="/public/img/logo_large.png" alt="">
+		<form novalidate name="signupform" class="signupform" method="post">
+			 		
+			<div class="form-group">
+				<div class="form-group-wrapper">
+					<div class="input-group input-group-lg">
+				 		<span class="input-group-addon">@</span>
+						<input type="email" class="form-control" placeholder="Enter your Email" ng-model="signup.UserEmail" name="UserEmail" ng-blur="blur.UserEmail=true" required>								
+					</div>	
+					
+					<span class="success help-block" ng-show="!signupform.UserEmail.$error.email && !signupform.UserEmail.$error.required && signupform.UserEmail.$dirty && signupform.validation_email_status!=0"><i class="fa fa-check"></i></span>						
+					<span class="error help-block" ng-show="signupform.validation_email_status==0"><i class="fa fa-times"></i> {{signupform.validation_email_message}}</span>
+					<span class="error help-block" ng-show="(signupform.UserEmail.$error.email || signupform.UserEmail.$error.required) && blur.UserEmail"><i class="fa fa-times"></i> Invalid email</span>	
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-group-wrapper">
+					<div class="input-group input-group-lg">
+				 		<span class="input-group-addon"><i class="fa fa-key"></i></span>
+						<input type="password" class="form-control" placeholder="Choose a Password" ng-model="signup.UserPassword" name="UserPassword" ng-blur="blur.UserPassword=true" ng-minlength=6 required>														
+					</div>
+					<span class="error help-block"	ng-show="(signupform.UserPassword.$error.required || signupform.UserPassword.$error.minlength) && blur.UserPassword"><i class="fa fa-times"></i> 6 characters</span>
+					<span class="success help-block" ng-show="!signupform.UserPassword.$error.required && !signupform.UserPassword.$error.minlength && signupform.UserPassword.$dirty"><i class="fa fa-check"></i></span>
+				</div>	
+			</div>
+			
+			<div class="form-group">
+				<div class="form-group-wrapper">
+					<button type="button" class="btn btn-lg btn-danger" ng-click="signup.submitSignup(signupform)">
+						<i ng-show="signup.loading" class="fa fa-spinner fa-spin"></i> Join Looksy!
+					</button>							
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>

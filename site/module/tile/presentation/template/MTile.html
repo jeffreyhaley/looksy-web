@@ -1,0 +1,162 @@
+<div class="MTile" ng-controller="MTileController">
+
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- New Post Tile Modal  -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<div class="modal fade" id="modal-tile-new" tabindex="-1" role="dialog" aria-labelledby="modal-tile" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Post Tile</h4>
+				</div>
+				<div class="modal-body">
+				<div class="row">						
+					<form novalidate name="tileform" class="tile-form" method="post">			
+						<ul class="control-group">
+							<li class="form-group">
+								<label class="col-sm-2 control-label">Photo</label>
+		    					<div class="col-sm-10">		
+			    					<div class="fileinput fileinput-new" data-provides="fileinput">
+			  							<div id="imagePreviewContainer" class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+			  							</div>
+										<div>
+										    <span class="btn btn-default btn-file">
+										    	<span id="btnNewImage" class="fileinput-new">Select image</span>
+										    	<span id="btnChangeImage" class="fileinput-exists">Change</span>
+										    		<input type="file" fileread="tile.Image.src" ng-model="tile.Image" name="Image"/>
+										    	</span>
+										    	<button id="btnRotate" type="button" class="fileinput-exists btn btn-sm btn-default" ng-click="tileHandler.rotate();">
+										    		<span class="glyphicon glyphicon-repeat"></span> Rotate
+										    	</button>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="form-group">
+								<label class="col-sm-2 control-label">Caption</label>	
+								<div class="col-sm-10">							
+									<textarea class="form-control" rows="2" placeholder="Describe your post..." ng-model="tile.TileCaption" name="TileCaption"></textarea>
+								</div>
+							</li>				
+						</ul>
+					</form>
+				</div>
+				</div>
+
+				<div class="modal-footer">					
+					<button type="button" class="btn btn-sm btn-danger" ng-click="tileHandler.submitTile(tileform, 'create', tile);">
+						<i ng-show="tileHandler.loading" class="fa fa-spinner fa-spin"></i> Save
+					</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->
+
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- Instruction Tile  -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<div class="row">
+		<div ng-if="!tiles[0]" class="instruction-module-container">
+			<div class="instruction-container">
+				<p><h2>Ready to start posting!</h2></p>	
+				<p>
+					Now that you've set up your location and beacon, it's time to start posting content!
+				</p>
+				<p>
+					Running a sale on an item of clothing? Post an image and let your customers know why they should buy it!
+					Special on a food or drink? Entice the hungry with a picture of the meal!
+				<p>
+					Get started by clicking <a data-toggle="modal" data-target="#modal-tile-new">post</a>!
+				</p>				
+			</div>
+		</div>
+	</div>
+
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- All tiles  -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	
+	<div id="wrapper">
+		<div id="columns">
+			<div ng-repeat="tile in tiles" class="pin module-container">
+				<div class="btn-group pull-right action-menu">
+					<button class="btn btn-danger btn-xs dropdown-toggle">								
+						<i class="fa fa-chevron-down"></i>							
+					</button>
+					  <ul class="dropdown-menu">
+					    <li><a data-toggle="modal" data-target="#modal-tile-{{tile.TileId}}">Edit Post</a></li>
+						<li><a ng-click="tileHandler.submitTile(tileform, 'delete', tile);">Remove Post</a></li>
+					  </ul>
+				</div>
+				<div class="tile-container">	
+					<div class="tile-image" ng-click="tileHandler.loadFullTile(tile.TileId)" >
+						<img src="/public/img/small/{{tile.ImageName}}" />
+					</div>					
+								
+					<div class="tile-info">
+						<span>{{tile.TileCaption}}</span></br>
+						<span class="tile-time">
+							{{tile.TileCreationTime}}
+						</span>
+						<span class="tile-stats-favorite">							
+							<span class="label label-danger"><i class="fa fa-heart"></i> {{tile.TileFavoriteCount}}</span> 
+						</span>
+						<span class="tile-stats">	
+							<span class="label label-danger"><i class="fa fa-eye"></i> {{tile.TileVisitCount}}</span>						 
+						</span>								
+					</div>	
+				
+				<!-- Modal -->
+				<div class="modal fade" id="modal-tile-{{tile.TileId}}" tabindex="-1" role="dialog" aria-labelledby="modal-tile" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Edit Tile</h4>
+							</div>
+							<div class="modal-body">
+							<div class="row">						
+								<form novalidate name="tileform" class="tile-form" method="post">			
+									<ul class="control-group">
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Photo</label>
+					    					<div class="col-sm-10">		
+						    					<div class="fileinput fileinput-new" data-provides="fileinput">
+						  							<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+						  								<img src="/public/img/large/{{tile.ImageName}}" />
+						  							</div>
+													<div>
+													    <span class="btn btn-default btn-file">
+													    	<span class="fileinput-new">Select Photo</span>
+													    	<span class="fileinput-exists">Change</span>
+													    		<input type="file" fileread="tile.Image.src" ng-model="tile.Image" name="Image" />
+													    	</span>
+													    
+													</div>
+												</div>
+											</div>
+										</li>									
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Caption</label>	
+											<div class="col-sm-10">							
+												<textarea class="form-control" rows="2" placeholder="Describe your post..." ng-model="tile.TileCaption" name="TileCaption"></textarea>
+											</div>
+										</li>				
+									</ul>
+								</form>
+							</div>
+							</div>
+			
+							<div class="modal-footer">					
+								<button type="button" class="btn btn-sm btn-danger" ng-click="tileHandler.submitTile(tileform, 'update', tile);">
+									<i ng-show="tileHandler.loading" class="fa fa-spinner fa-spin"></i> Save
+								</button>
+							</div>
+						</div> <!-- /.modal-content -->
+					</div> <!-- /.modal-dialog -->
+				</div> <!-- /.modal -->			
+			</div>
+		</div> <!-- column -->
+	</div> <!-- wrapper -->
+</div>

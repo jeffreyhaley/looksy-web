@@ -1,0 +1,64 @@
+@import "MCoreColor.less";
+
+.MCoreHeader
+{
+	.unauthenticated
+	{
+		opacity: 0.3;
+	}
+	.unauthenticated:hover
+	{
+		opacity: 1.0;
+	}
+	.logo-title
+	{
+	
+		font-size: 36px;
+		font-weight: bold;
+		color: @color-red;
+		font-family: 'Pacifico', cursive;
+	}
+
+	@media (min-width: 0px) {
+		.modal-dialog {
+			width: 100%;			
+		}
+	}
+	
+	@media (min-width: 400px) {
+		.modal-dialog {
+			width: 400px;			
+		}
+	}
+	
+	.modal-dialog
+	{		
+		.modal-footer
+		{
+			.links
+			{
+				text-align: left;
+				line-height: 1.7;
+				padding-top: -5px;
+				margin-top: -10px;
+			}
+			
+			text-align: right;
+			padding: 15px 5px 7px 5px;
+			margin: 0px 0px 3px 0px;			
+		}
+	
+		.modal-body
+		{
+			padding: 10px;
+		}
+		
+		.row
+		{
+			padding: 0px;
+			margin: 0px;
+		}
+	}
+	
+
+}

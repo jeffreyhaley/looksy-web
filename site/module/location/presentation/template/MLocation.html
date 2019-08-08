@@ -1,0 +1,375 @@
+<div class="MLocation" ng-cloak >
+
+	<!-- Modal -->
+	<div class="modal fade" id="modal-location-new" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-location" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Create a Location</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">						
+						<form novalidate name="locationform" class="location-form" method="post">			
+							<ul class="control-group">
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Name</label>
+			    					<div class="col-sm-10">
+										<input type="text" class="form-control" placeholder="Name of your location" ng-model="location.LocationName" name="LocationName" required ng-minlength=3>					
+										<span class="success" ng-show="(!locationform.LocationName.$error.required && !locationform.LocationName.$error.minlength) && location.LocationName.length && locationform.validation_LocationName_status!=0"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(locationform.LocationName.$error.required || locationform.LocationName.$error.minlength) && locationHandler.showError"><i class="fa fa-times"></i> Enter 3 or more characters to identify your location.</span>
+										<span class="error"	ng-show="locationform.validation_LocationName_status==0"><i class="fa fa-times"></i> {{locationform.validation_LocationName_message}}</span>
+									</div>
+								</li>
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Description</label>
+			    					<div class="col-sm-10">
+										<textarea class="form-control" rows="2" placeholder="Description" ng-model="location.LocationDescription" name="LocationDescription" required></textarea>
+										<span class="success" ng-show="(!locationform.LocationDescription.$error.required)  && location.LocationDescription.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(locationform.LocationDescription.$error.required) && locationHandler.showError">
+										<i class="fa fa-times"></i> A description for your location is required. It should tell the visiting customer what your store or restaurant is all about.</span>      						
+			    					</div>
+								</li>
+								<!-- 
+								<li class="form-group">
+									<label class="col-sm-2 control-label">SSID</label>
+			    					<div class="col-sm-10">
+										<input type="text" class="form-control" placeholder="Transmitter SSID" ng-model="location.TransmitterSsid" name="TransmitterSsid" required>
+										<span class="success" ng-show="(!locationform.TransmitterSsid.$error.required) && location.TransmitterSsid.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(locationform.TransmitterSsid.$error.required) && locationHandler.showError"><i class="fa fa-times"></i> SSID is required.</span>
+									</div>
+								</li>
+								 -->
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Unique Id</label>
+			    					<div class="col-sm-10">
+										<input type="text" ui-mask="{{'**-**-**-**-**-**'}}" class="form-control" placeholder="Transmitter BSSID" ng-model="location.TransmitterBssid" name="TransmitterBssid" required>
+										<span class="success" ng-show="(location.TransmitterBssid.length) && location.TransmitterBssid.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(!location.TransmitterBssid.length) && locationHandler.showError">
+										<i class="fa fa-times"></i> Unique Id for sensor is required.</span>
+									</div>
+								</li>							
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Logo</label>
+			    					<div class="col-sm-10">		
+				    					<div class="fileinput fileinput-new" data-provides="fileinput">
+				  							<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+				  							</div>
+											<div>
+											    <span class="btn btn-default btn-file">
+											    	<span class="fileinput-new">Select image</span>
+											    	<span class="fileinput-exists">Change</span>
+											    		<input type="file" fileread="location.Image.src" ng-model="location.Image" name="Image" />
+											    	</span>
+											    
+											</div>
+											<span class="success" ng-show="location.Image.src"><i class="fa fa-check"></i></span>
+										</div>
+									</div>
+								</li>  
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Phone</label>
+			    					<div class="col-sm-10">	
+										<input type="text" ui-mask="{{'(999) 999-9999'}}" class="form-control" placeholder="Phone Number" ng-model="location.LocationPhoneNumber" name="LocationPhoneNumber" required>
+										<span class="success" ng-show="location.LocationPhoneNumber.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(!location.LocationPhoneNumber.length) && locationHandler.showError"><i class="fa fa-times"></i> A valid telephone number is required.</span>
+									</div>
+								</li>
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Address</label>
+			    					<div class="col-sm-10">		
+										<input type="text" class="form-control" placeholder="Address" ng-model="location.LocationAddress" name="LocationAddress" required ng-minlength=5>
+										<span class="success" ng-show="(!locationform.LocationAddress.$error.required && !locationform.LocationAddress.$error.minlength) && location.LocationAddress.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(locationform.LocationAddress.$error.required || locationform.LocationAddress.$error.minlength) && locationHandler.showError"><i class="fa fa-times"></i> A valid address is required.</span>
+									</div>
+								</li>	
+								<li class="form-group">
+									<label class="col-sm-2 control-label">City</label>
+			    					<div class="col-sm-10">		
+										<input type="text" class="form-control" placeholder="City" ng-model="location.LocationCity" name="LocationCity" required ng-minlength=2>
+										<span class="success" ng-show="!locationform.LocationCity.$error.required && location.LocationCity.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="locationform.LocationCity.$error.required && location.LocationCity.length"><i class="fa fa-times"></i> Doesn't look like a valid city.</span>
+									</div>				
+								</li>
+								<li class="form-group">
+									<label class="col-sm-2 control-label">State</label>
+			    					<div class="col-sm-10">	
+										<select class="form-control" ng-model="location.USStateId" ng-options="state.USStateId as state.USStateName for state in states">
+					    					<option value="">Select a State</option>
+					 					</select>
+										<span class="success" ng-show="!locationform.USStateId.$error.required && location.USStateId.length"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="locationform.USStateId.$error.required && location.USStateId.length"><i class="fa fa-times"></i> Doesn't look like a valid state.</span>
+									</div>
+								</li>
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Zip</label>
+			    					<div class="col-sm-10">	
+										<input type="text" ui-mask="{{'99999'}}" class="form-control" placeholder="Zip" ng-model="location.LocationZip" name="LocationZip" required>
+										<span class="success" ng-show="(location.LocationZip.length) && locationform.validation_LocationZip_status!=0"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="(!location.LocationZip.length) && locationHandler.showError"><i class="fa fa-times"></i> A valid zip code is required.</span>
+										<span class="error"	ng-show="locationform.validation_LocationZip_status==0"><i class="fa fa-times"></i> {{locationform.validation_LocationZip_message}}</span>
+									</div>
+								</li>	
+								<li class="form-group">
+									<label class="col-sm-2 control-label">Website</label>
+				    				<div class="col-sm-10">	
+										<input type="url" class="form-control" placeholder="http://yoursite.com" value="http://" ng-model="location.LocationWebSite" name="LocationWebSite">
+										<span class="success" ng-show="(location.LocationWebSite.length)"><i class="fa fa-check"></i></span>
+										<span class="error"	ng-show="locationform.LocationWebSite.$error.required && location.LocationWebSite.length"><i class="fa fa-times"></i> Enter a valid website.</span>
+									</div>
+									
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+
+				<div class="modal-footer">					
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-danger" ng-click="locationHandler.submitLocation(locationform, 'create', location);">
+							<i ng-show="locationHandler.loading" class="fa fa-spinner fa-spin"></i> Save
+					</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->
+	
+	<!-- Modal -->
+	<div class="modal fade" id="modal-location-delete" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-delete" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Remove Location</h4>
+				</div>
+				<div class="modal-body">
+					<p>						
+						Are you sure you want to remove your location? This will remove all of the associated tiles.
+					</p>
+				</div>
+
+				<div class="modal-footer">					
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" ng-click="locationHandler.deleteLocation(location.LocationId);">
+							<i ng-show="locationHandler.loading" class="fa fa-spinner fa-spin"></i> Remove
+					</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="modal-location-delete" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-delete" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Remove Location</h4>
+				</div>
+				<div class="modal-body">
+					<p>						
+						Are you sure you want to remove your location? This will remove all of the associated tiles.
+					</p>
+				</div>
+
+				<div class="modal-footer">					
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" ng-click="locationHandler.deleteLocation(location.LocationId);">
+							<i ng-show="locationHandler.loading" class="fa fa-spinner fa-spin"></i> Delete
+					</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->	
+	
+	
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<!-- Instruction Location  -->
+	<!-- -------------------------------------------------------------------------------------------- -->
+	<div class="row">
+			<div ng-if="!location || !loaded" class="instruction-module-container">
+				<div class="instruction-container">
+					<p><h2>Welcome!</h2></p>
+					<p><strong>Start by creating a new location</strong></p>
+					<p>
+						A location is your place of business. We'll ask you to provide some 
+						basic information about it and give you an opportunity to register
+						your first Looksy beacon!
+					</p>	
+					<div class="instruction-container-post pull-right">				
+						<button type="button" class="btn btn-sm btn-danger pull-right" data-toggle="modal" data-target="#modal-location-new">Create a Location</button>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	
+	<div class="row">
+
+			<div ng-show="location && loaded" class="header-module-container">
+			<div class="center-wrapper">
+					<div class="tile-header-action">						
+						<div class="btn-group">
+							
+							<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-tile-new">Post</button>
+						  	<button class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
+						    	<span class="caret"></span>
+						 	</button>
+							<ul class="dropdown-menu pull-right">
+								<li><a data-toggle="modal" data-target="#modal-location-{{location.LocationId}}">Edit Location</a></li>
+								<li><a data-toggle="modal" data-target="#modal-location-delete" >Remove Location</a></li>
+							</ul>
+						</div>
+					</div>	
+					
+					<div class="tile-header-image pull-left" style="background-image: url('/public/img/small/{{location.ImageName}}'); background-size: 150px; background-repeat: no-repeat;"></div>	
+
+					<div class="tile-header-body pull-left">							
+						<ul>
+						
+							<li class="tile-header-name">
+								{{location.LocationName}}							
+							</li>							
+							<li class="tile-header-location">
+								<i class="fa fa-rss fa-fw"></i>
+								{{location.TransmitterBssid}}
+							</li>
+							<li class="tile-header-location">
+								<i class="fa fa-phone fa-fw"></i>
+								{{location.LocationPhoneNumber}}								
+							</li>
+							<li class="tile-header-location">
+								<i class="fa fa-map-marker fa-fw"></i>
+								{{location.LocationAddress}} {{location.LocationCity}}, {{location.USStateAbbr}} {{location.LocationZip}}
+							</li>
+							<li class="tile-header-location">
+								<i class="fa fa-globe fa-fw"></i>
+								{{location.LocationWebSite}}				
+							</li>
+						</ul>	
+					</div>	
+						
+			<!-- Modal -->
+			<div class="modal fade" data-backdrop="static" id="modal-location-{{location.LocationId}}" tabindex="-1" role="dialog" aria-labelledby="modal-tile" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Edit Location</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">						
+								<form novalidate name="locationform" class="location-form" method="post">	
+									<ul class="control-group">
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Description</label>
+					    					<div class="col-sm-10">
+												<textarea class="form-control" rows="3" placeholder="Description" ng-model="location.LocationDescription" name="LocationDescription" required></textarea>
+												<span class="success" ng-show="(!locationform.LocationDescription.$error.required)  && location.LocationDescription.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="(locationform.LocationDescription.$error.required) && locationHandler.showError"><i class="fa fa-times"></i> Location is required. This description is demystify your location giving users a sense of what you have to offer.</span>      						
+					    					</div>
+										</li>
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Unique Id</label>
+					    					<div class="col-sm-10">
+												<input type="text" ui-mask="{{'**-**-**-**-**-**'}}" class="form-control" placeholder="Transmitter BSSID" ng-model="location.TransmitterBssid" name="TransmitterBssid" required>
+												<span class="success" ng-show="(location.TransmitterBssid.length) && location.TransmitterBssid.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="(!location.TransmitterBssid.length) && locationHandler.showError">
+												<i class="fa fa-times"></i> Unique Id for sensor is required.</span>
+											</div>
+										</li>							
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Logo</label>
+					    					<div class="col-sm-10">		
+						    					<div class="fileinput fileinput-new" data-provides="fileinput">
+						  							<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+						  								<img src="/public/img/small/{{location.ImageName}}" />
+						  							</div>
+													<div>
+													    <span class="btn btn-default btn-file">
+													    	<span class="fileinput-new">Select image</span>
+													    	<span class="fileinput-exists">Change</span>
+													    		<input type="file" fileread="location.Image.src" ng-model="location.Image" name="Image" />
+													    	</span>
+													    
+													</div>
+													<span class="success" ng-show="location.Image.src"><i class="fa fa-check"></i></span>
+												</div>
+											</div>
+										</li>  
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Phone</label>
+					    					<div class="col-sm-10">	
+												<input type="text" ui-mask="{{'(999) 999-9999'}}" class="form-control" placeholder="Phone Number" ng-model="location.LocationPhoneNumber" name="LocationPhoneNumber" required>
+												<span class="success" ng-show="location.LocationPhoneNumber.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="(!location.LocationPhoneNumber.length) && locationHandler.showError"><i class="fa fa-times"></i> A valid telephone number is required.</span>
+											</div>
+										</li>
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Address</label>
+					    					<div class="col-sm-10">		
+												<input type="text" class="form-control" placeholder="Address" ng-model="location.LocationAddress" name="LocationAddress" required ng-minlength=5>
+												<span class="success" ng-show="(!locationform.LocationAddress.$error.required && !locationform.LocationAddress.$error.minlength) && location.LocationAddress.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="(locationform.LocationAddress.$error.required || locationform.LocationAddress.$error.minlength) && locationHandler.showError"><i class="fa fa-times"></i> A valid address is required.</span>
+											</div>
+										</li>	
+										<li class="form-group">
+											<label class="col-sm-2 control-label">City</label>
+					    					<div class="col-sm-10">		
+												<input type="text" class="form-control" placeholder="City" ng-model="location.LocationCity" name="LocationCity" required ng-minlength=2>
+												<span class="success" ng-show="!locationform.LocationCity.$error.required && location.LocationCity.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="locationform.LocationCity.$error.required && location.LocationCity.length"><i class="fa fa-times"></i> Doesn't look like a valid city.</span>
+											</div>				
+										</li>
+										<li class="form-group">
+											<label class="col-sm-2 control-label">State</label>
+					    					<div class="col-sm-10">	
+												<select class="form-control" ng-model="location.USStateId" ng-options="state.USStateId as state.USStateName for state in states">
+							    					<option value="">Select a State</option>
+							 					</select>
+												<span class="success" ng-show="!locationform.USStateId.$error.required && location.USStateId.length"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="locationform.USStateId.$error.required && location.USStateId.length"><i class="fa fa-times"></i> Doesn't look like a valid state.</span>
+											</div>
+										</li>
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Zip</label>
+					    					<div class="col-sm-10">	
+												<input type="text" ui-mask="{{'99999'}}" class="form-control" placeholder="Zip" ng-model="location.LocationZip" name="LocationZip" required>
+												<span class="success" ng-show="(location.LocationZip.length) && locationform.validation_LocationZip_status!=0"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="(!location.LocationZip.length) && locationHandler.showError"><i class="fa fa-times"></i> A valid zip code is required.</span>
+												<span class="error"	ng-show="locationform.validation_LocationZip_status==0"><i class="fa fa-times"></i> {{locationform.validation_LocationZip_message}}</span>
+											</div>
+										</li>	
+										<li class="form-group">
+											<label class="col-sm-2 control-label">Website</label>
+						    				<div class="col-sm-10">	
+												<input type="url" class="form-control" placeholder="http://yoursite.com" value="http://" ng-model="location.LocationWebSite" name="LocationWebSite">
+												<span class="success" ng-show="(location.LocationWebSite.length)"><i class="fa fa-check"></i></span>
+												<span class="error"	ng-show="locationform.LocationWebSite.$error.required && location.LocationWebSite.length"><i class="fa fa-times"></i> Enter a valid website.</span>
+											</div>
+											
+										</li>
+										
+									</ul>
+								</form>
+							</div>
+						</div>
+		
+						<div class="modal-footer">					
+							<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-sm btn-danger" ng-click="locationHandler.submitLocation(locationform, 'update', location);">
+								<i ng-show="locationHandler.loading" class="fa fa-spinner fa-spin"></i> Save
+							</button>
+						</div>
+					</div> <!-- /.modal-content -->
+				</div> <!-- /.modal-dialog -->
+			</div> <!-- /.modal -->
+			
+			</div>
+</div>
+	</div>
+	
+	<!-- Load Tile View ================================================================================== -->
+	<div ui-view></div>
+
+</div>

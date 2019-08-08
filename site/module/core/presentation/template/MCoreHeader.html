@@ -1,0 +1,69 @@
+<div class="MCoreHeader ng-cloak">
+    <div ng-if="authenticated">
+		<!-- Navbar ================================================== -->
+		<nav class="navbar navbar-default navbar-fixed-top ddd" role="navigation">
+	
+			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-collapse-authen">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="./index.html">
+					<img style="width: 80px; margin-top: 7px;" src="./public/img/logo_small.png">
+				</a>
+			</div>
+	
+			<!-- collapsed links -->
+			<div class="collapse navbar-collapse" id="header-collapse-authen">
+				<ul class="nav navbar-nav navbar-left">
+					<!-- <li class="headertab"><a ui-sref="location">Home</a></li> -->
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<div class="btn-group navbar-btn">
+							<button type="button" class=" btn btn-sm btn-default">{{useremail}}</button>
+							<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a ng-click="logout()">Logout</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	
+	<div ng-if="!authenticated">
+
+		<!-- Login Modal ================================================== -->
+		<ng-include src="'./module/login/presentation/template/MLogin.html'"></ng-include>
+	    
+		<!-- Navbar ================================================== -->
+		<nav class="navbar navbar-default navbar-fixed-top unauthenticated" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-collapse-notauthen">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+	
+			<!-- collapsed links -->
+			<div class="collapse navbar-collapse" id="header-collapse-notauthen">
+				<ul class="nav navbar-nav navbar-left">
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<div class="navbar-btn">
+							<button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-login">Log In</button>						
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</div>

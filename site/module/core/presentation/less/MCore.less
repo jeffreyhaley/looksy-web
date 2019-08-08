@@ -1,0 +1,210 @@
+@import "MCoreColor.less";
+
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	padding-top: 65px;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 14px;
+	color:  @color-dark-gray;
+ 	background-color: #e3e3e3;
+}
+
+
+h1, h2 
+{	
+	color: @color-red;
+	padding-top: 10px;
+	padding-bottom: 10px;	
+	margin: 0px;
+}
+
+h3, h4
+{
+	font-weight: bold;
+	color: @color-red;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin: 0px;
+}
+
+@font-face {
+    font-family: "alba";
+    src: url('../font/alba.ttf') format("truetype");
+}
+
+
+.logo-title
+{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 128px;
+	color: @color-white;
+	font-family: 'alba';
+}
+
+.color-gray
+{
+	color: @color-dark-gray;
+}
+
+.color-red
+{
+	color: @color-red;
+}
+
+.color-blue
+{
+	color: @color-blue;
+}
+
+.facebook-blue {
+	color: @color-facebook-blue;
+}
+
+.twitter-blue
+{
+	color: @color-twitter-blue;
+}
+
+.instagram-blue
+{
+	color: @color-instagram-blue;
+}
+
+.success 
+{
+	color: #468847;
+}
+
+.error 
+{
+	color: #b94a48;
+}
+
+					
+#header-message {
+	position: fixed;
+	top: 48px;	
+	width: 100%;
+	z-index: 999999;
+	
+	.alert-message
+	{ 
+		width: 100%; 
+		font-size: 12px;
+		z-index: 999999;
+	  
+	}
+	div.alert
+	{  
+		z-index: 999999;
+		width: 50%; 
+		margin:0 auto;
+		box-shadow:0px 2px 10px gray;
+		line-height: 1.5;
+	}
+}
+
+
+.module-container {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+	-moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+	background: @color-white;
+	
+	break-inside: avoid-column;
+	-webkit-column-break-inside: avoid;
+	page-break-inside: avoid;
+	overflow:hidden;
+}
+
+.modal-title
+{
+	color: @color-red;
+	font-size: 16px;
+}
+
+.modal-footer
+{
+	background-color: @color-light-gray;
+}
+
+/*
+ The animate class is apart of the element and the ng-enter class
+ is attached to the element once the enter animation event is triggered
+*/
+.reveal-animation.ng-enter {
+ -webkit-transition: 0.5s linear all; /* Safari/Chrome */
+ transition: 0.5s linear all; /* All other modern browsers and IE10+ */
+ 
+ /* The animation preparation code */
+ opacity: 0;
+}
+ 
+/*
+ Keep in mind that you want to combine both CSS
+ classes together to avoid any CSS-specificity
+ conflicts
+*/
+.reveal-animation.ng-enter.ng-enter-active {
+ /* The animation code itself */
+ opacity: 1;
+}
+
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------------------- */
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+}
+
+.form-group
+{
+	.success {							
+		position: absolute;
+		padding: 8px 25px;
+		bottom: 0;
+		right: 0;
+	}
+}
+
+a
+{
+	cursor: pointer;
+}

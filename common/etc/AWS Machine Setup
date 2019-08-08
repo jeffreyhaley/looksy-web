@@ -1,0 +1,60 @@
+## Open httpd.conf for writing
+sudo chmod 777 /etc/httpd/conf/httpd.conf
+
+## Addtype for php
+sudo cat "AddType application/x-httpd-php .php" >> /etc/httpd/conf/httpd.conf
+
+## Allow write for session data
+sudo chmod 777 /var/lib/php/5.5/session
+
+## Create image directories
+sudo mkdir --mode=777 /var/looksy_img
+cd /var/looksy_img
+sudo mkdir --mode=777 small medium large original
+
+## Alias for image storage dir
+sudo cat <<EOT >> /etc/httpd/conf/httpd.conf
+Alias /public/img/small /var/looksy_img/small
+<Directory /var/looksy_img/small>
+    Order allow,deny
+    Allow from all
+</Directory>
+Alias /public/img/medium /var/looksy_img/medium
+<Directory /var/looksy_img/medium>
+    Order allow,deny
+    Allow from all
+</Directory>
+Alias /public/img/large /var/looksy_img/large
+<Directory /var/looksy_img/large>
+    Order allow,deny
+    Allow from all
+</Directory>
+EOT
+
+## Url Redirection
+sudo cat <<EOT >> /etc/httpd/conf/httpd.conf
+RedirectMatch ^/t/(.*)$ /#/tile/$1
+Redirect /app market://details?id=at.looksy
+EOT
+
+## Put permissions back
+sudo chmod 755 /etc/httpd/conf/httpd.conf
+
+#### MANUAL #####
+# Change block above DocumentRoot to
+#
+# Deny access to the entirety of your server's filesystem. You must
+# explicitly permit access to web content directories in other 
+# <Directory> blocks below.
+#
+<Directory />
+    Options -Indexes +FollowSymLinks
+    AllowOverride AuthConfig FileInfo
+    Order allow,deny
+    Allow from all
+</Directory>
+
+##################
+
+## Reboot
+sudo apachectl restart
